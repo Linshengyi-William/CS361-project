@@ -41,10 +41,14 @@ soup = BeautifulSoup(response.content, 'html.parser')
 
 text = ""
 for paragraph in soup.find_all('p'):
-    text += paragraph.text
-    break
+    #for i in range(0,10):
+    #    print("->",paragraph.text[i],"<-")
+    if paragraph.text != '\n' and len(paragraph.text) > 20:
+        text += paragraph.text
+        text += "\n"
+        break
 text = re.sub(r'\[.*?\]+', '', text)
-text = text.replace('\n', '')
+#text = text.replace('\n', '')
 
 images = soup.find_all('img', {'src':re.compile('.jpg')})
 for image in images: 
