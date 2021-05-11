@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{%block title%}{% endblock %}
+{%block content%}
+<form action="#" method="POST">
+    <br>
+    <h4>What's the URL of Desired Wekipedia web page?</h4>
+    <br>
+    <p><span title="*Note* Invalid URL or non-Wikipedia URL will let the scraper set the default URL as the desired wiki URL.">URL:</span>
+    <span title="Enter the desired Wikipedia's URL here."><input name ="inp_url" /></span></p>
+    <hr>
+
+    <h4>What kind of data would you like to scrape?</h4>
+    <br>
+    <span title ="Select if you want to scrape text">
+        <input type="radio" id="scrape-text" name="scrape_type" value="scrape-text" checked>
+        <label for="scrape-text">Scrape text</label>
+        </span>
+    <span title ="Select if you want to scrape picture">
+        <input type="radio" id="scrape-picture" name="scrape_type" value="scrape-picture">
+        <label for="scrape-picture">Scrape picture</label>
+        </span>
+    <span title ="Select if you want to scrape both text and picture">
+        <input type="radio" id="scrape-both" name="scrape_type" value="scrape-both">
+        <label for="scrape-both">Both</label>
+        </span> 
+    <hr>
+
+    <h4>How do you want us to deliver the output?</h4>
+    <br>
+    <span title ="Select if you want to display the output on the screen">
+        <input type="radio" id="output-on-screen" name="outputType" value="output-on-screen" checked>
+        <label for="output-on-screen">Display the output on the screen</label>
+        </span>
+    <span title ="Select if you want to save the output as a CSV file">
+        <input type="radio" id="output-save-file" name="outputType" value="output-save-file">
+        <label for="output-save-file">Save the output as a CSV file</label>
+        </span>
+    <span title ="Select if you want the output both displayed on the screen and saved as a CSV file">
+        <input type="radio" id="output-both" name="outputType" value="output-both">
+        <label for="output-both">Both</label>
+        </span> 
+    <hr>
+<!--</form>
+<form>-->
+    <h4>Do you want to use any of the available service?</h4>
+    <br>
+    <span title ="Select if you want to find the first word of the scrapped text">
+        <input type="checkbox" id="service-first-word" name="serviceKind" value="service-first-word">
+        <label for="service-first-word">The First Word Service</label>
+        </span>
+    <hr>
+<!--</form>
+    <form>-->
+    <input title ="Select if you want to find the first word of the scrapped text" type="submit" id="startScraping" name="startScraping" value="startScraping">
+        <label for="startScraping">Start Scraping</label>
+    <input type="reset" id="reset-button">
+        <label for"reset-button">Reset all the changes you made.</label>
+    <hr>
+</form>
+{%if displayScreenValue != "None"%}
+    <dev>
+        <textarea name = "display-screen" style="width: 800px;length: 1000px;" readonly>
+        {{displayScreenValue}}
+        </textarea>
+    </dev>
+{%endif%}
+
+
+    {%endblock%}
