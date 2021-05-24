@@ -3,6 +3,7 @@
 {%block content%}
 <form action="#" method="POST">
     <br>
+    <p style="color:red;">*Reminder* Move your mouse on an option will get its description! </p>
     <h4>What's the URL of Desired Wekipedia web page?</h4>
     <br>
     <p><span title="*Note* Invalid URL or non-Wikipedia URL will let the scraper set the default URL as the desired wiki URL.">URL:</span>
@@ -31,17 +32,16 @@
         <input type="radio" id="output-on-screen" name="outputType" value="output-on-screen" checked>
         <label for="output-on-screen">Display the output on the screen</label>
         </span>
-    <span title ="Select if you want to save the output as a CSV file">
+    <span title ="Select if you want to save the output as a TXT file">
         <input type="radio" id="output-save-file" name="outputType" value="output-save-file">
-        <label for="output-save-file">Save the output as a CSV file</label>
+        <label for="output-save-file">Save the output as a TXT file</label>
         </span>
-    <span title ="Select if you want the output both displayed on the screen and saved as a CSV file">
+    <span title ="Select if you want the output both displayed on the screen and saved as a TXT file">
         <input type="radio" id="output-both" name="outputType" value="output-both">
         <label for="output-both">Both</label>
         </span> 
     <hr>
-<!--</form>
-<form>-->
+<!--
     <h4>Do you want to use any of the available service?</h4>
     <br>
     <span title ="Select if you want to find the first word of the scrapped text">
@@ -49,8 +49,7 @@
         <label for="service-first-word">The First Word Service</label>
         </span>
     <hr>
-<!--</form>
-    <form>-->
+-->
     <input title ="Select if you want to find the first word of the scrapped text" type="submit" id="startScraping" name="startScraping" value="startScraping">
         <label for="startScraping">Start Scraping</label>
     <input type="reset" id="reset-button">

@@ -2,6 +2,9 @@
 # https://levelup.gitconnected.com/two-simple-ways-to-scrape-text-from-wikipedia-in-python-9ce07426579b
 from flask import Flask, redirect, url_for, render_template, request
 
+import os
+from pathlib import Path
+from random import randint
 import validators
 import requests
 import sys
@@ -38,6 +41,10 @@ def admin():
 
 def scraper(input_url,scrapeType,outputType):
     
+    homename =  str(Path.home())
+    desktop = homename + "/Desktop"
+    print(desktop)
+
     default_url = "https://en.wikipedia.org/wiki/Web_scraping"
     check_wiki = "wikipedia.org" in input_url
     check_validurl = validators.url(input_url)
@@ -47,7 +54,7 @@ def scraper(input_url,scrapeType,outputType):
     print(input_url)
 
     text = ""
-
+    allImages =""
     if check_wiki == False or check_validurl == False:
         text+="*< The URL can't be used as the targeted URL. The scraper will use the default URL as the targeted URL >*\n"
         text+="*< Reason:  >*\n"
@@ -77,30 +84,41 @@ def scraper(input_url,scrapeType,outputType):
     textImages = text
     for image in images: 
         textImages += image['src']+ '\n'
+        allImages+= (image['src']+'\n')
     if(scrapeType == "scrape-text" or scrapeType == "scrape-both"):  
         if outputType == "output-on-screen" or outputType == "output-both":
-            return textImages
             if outputType == "output-both":
-                pass
+                if scrapeType == "scrape-text":
+                    writeToFile(desktop, text)
+                    return text
+                writeToFile(desktop, textImages)
+                return textImages
+                
+            if scrapeType == "scrape-text":
+                return text
+            return textImages
+        else:
+            if scrapeType == "scrape-text":
+                writeToFile(desktop, text)
+            else:
+                writeToFile(desktop, textImages)
+
 
     else:
-        images = soup.find_all('img', {'src':re.compile('.jpg')})
-        for image in images:
-            allImages+= (image['src']+'\n')
         if outputType == "output-on-screen" or outputType == "output-both":
             if outputType == "output-both":
-                filename =  "scraper"+randint(0,10000)+".csv"
-                print("filename is: ",filename)
-                f = open(inp_filename,"w+")
-                f.write(text)
+                writeToFile(desktop, allImages)
             return allImages
         else:
-            filename =  "scraper"+randint(0,10000)+".csv"
-            print("filename is: ",filename)
-            f = open(inp_filename,"w+")
-            f.write(text)
+                writeToFile(desktop, allImages)
 
         
+def writeToFile(pathname,content):
+    filename = "scraper"+str(randint(0,10000))+".txt"
+    path = os.path.join(pathname, filename)
+    f = open(path,"w+")
+    f.writelines(content)
+    f.close() 
 
 if __name__ == "__main__":
     app.run(debug = True)
