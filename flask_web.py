@@ -20,9 +20,16 @@ def home():
     #displayScreenValue = None
     if request.method == "POST":
         url = request.form["inp_url"]
-        scrapeType = request.form["scrape_type"]
+        scrapeType = request.form["scrapeType"]
         outputType = request.form["outputType"]
-        screenValue = scraper(url, scrapeType, outputType)
+        serviceFirstWord = "serviceFirstWord" in request.form
+        serviceWordCount = "serviceWordCount" in request.form
+        services = [serviceFirstWord,serviceWordCount]
+        print("****************\n\n")
+        print("serviceFirstWord is: ",serviceFirstWord)
+        print("serviceWordCount is: ",serviceWordCount)
+        print("****************\n\n")
+        screenValue = scraper(url, scrapeType, outputType,services)
         #print(screenValue)
         #response
         return render_template("index.html", displayScreenValue=screenValue)
@@ -42,7 +49,7 @@ def admin():
     return redirect(url_for("home"))
 
 
-def scraper(input_url,scrapeType,outputType):
+def scraper(input_url,scrapeType,outputType,services):
     
     text = ""  
     pics = "" 
@@ -53,7 +60,7 @@ def scraper(input_url,scrapeType,outputType):
     response = requests.get(url=right_url)
     soup = BeautifulSoup(response.content, 'html.parser')
 
-    text = helper.grabText(soup, text)
+    text = helper.grabText(soup, text, services)
     pics = helper.grabPics(soup, pics)
     textPics = text + pics
 

@@ -28,7 +28,7 @@ def checkValidWikiURL(url):
     if check_wiki == False or checkValidURL(url) == False:
         text+="*< The URL can't be used as the targeted URL. The scraper will use the default URL as the targeted URL >*\n"
         text+="*< Reason:  >*\n"
-        if check_validurl == False:
+        if checkValidURL(url) == False:
             text+="*< Invlid URL >*\n"
         if check_wiki == False:
             text+="*< not a wekipedia URL >*\n"
@@ -36,13 +36,36 @@ def checkValidWikiURL(url):
 
     return text
 
-def grabText(soup,text):
+
+def firstWord(text):
+    strr = ""
+    textList = text.split()
+    strr +="*< The first word of the text is: "
+    strr +=textList[0]
+    strr +=" *>\n"
+    return strr
+
+def wordCount(text):
+    strr = ""
+    textList = text.split()
+    strr +="*< Total word: "
+    strr +=str(len(textList))
+    strr +=" *>\n"
+    return strr
+    
+def grabText(soup,text,services):
+    buffer = ""
     for paragraph in soup.find_all('p'):
         if paragraph.text != '\n' and len(paragraph.text) > 100:
-            text += paragraph.text
-            text += "\n"
+            buffer = paragraph.text
+            buffer += "\n"
             break
-    text = re.sub(r'\[.*?\]+', '', text)
+    buffer = re.sub(r'\[.*?\]+', '', buffer)
+    
+    if services[0] == True: text += firstWord(buffer)
+    if services[1] == True: text += wordCount(buffer)
+    text += buffer
+    
     return text
 
 def grabPics(soup,imageBuffer):

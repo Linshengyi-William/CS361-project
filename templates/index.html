@@ -13,15 +13,15 @@
     <h4>What kind of data would you like to scrape?</h4>
     <br>
     <span title ="Select if you want to scrape text">
-        <input type="radio" id="scrape-text" name="scrape_type" value="scrape-text" checked>
+        <input type="radio" id="scrape-text" name="scrapeType" value="scrape-text" checked>
         <label for="scrape-text">Scrape text</label>
         </span>
     <span title ="Select if you want to scrape picture">
-        <input type="radio" id="scrape-picture" name="scrape_type" value="scrape-picture">
+        <input type="radio" id="scrape-picture" name="scrapeType" value="scrape-picture">
         <label for="scrape-picture">Scrape picture</label>
         </span>
     <span title ="Select if you want to scrape both text and picture">
-        <input type="radio" id="scrape-both" name="scrape_type" value="scrape-both">
+        <input type="radio" id="scrape-both" name="scrapeType" value="scrape-both">
         <label for="scrape-both">Both</label>
         </span> 
     <hr>
@@ -42,15 +42,17 @@
         <label for="output-both">Both</label>
         </span> 
     <hr>
-<!--
+
     <h4>Do you want to use any of the available service?</h4>
     <br>
     <span title ="Select if you want to find the first word of the scrapped text">
-        <input type="checkbox" id="service-first-word" name="serviceKind" value="service-first-word">
+        <input type="checkbox" id="service-first-word" name="serviceFirstWord" value="service-first-word">
         <label for="service-first-word">The First Word Service</label>
+        <input type="checkbox" id="service-word-count" name="serviceWordCount" value="service-word-count">
+        <label for="service-word-count">The Word Count Service</label>
         </span>
     <hr>
--->
+
     <input title ="Select if you want to find the first word of the scrapped text" type="submit" id="startScraping" name="startScraping" value="startScraping">
         <label for="startScraping">Start Scraping</label>
     <input type="reset" id="reset-button">
@@ -60,8 +62,12 @@
 {%if displayScreenValue != "None"%}
     <dev>
         <textarea name = "display-screen" style="width: 800px;length: 1000px;" readonly>
+
+        
         {{displayScreenValue}}
         </textarea>
+        <!--<textarea name="display-screen" readonly="" style="margin-top: 0px; margin-bottom: 0px; height: 300px; width: 700px;">
+        -->
     </dev>
 {%endif%}
 
