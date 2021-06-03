@@ -17,7 +17,6 @@ import re
 app = Flask(__name__)
 @app.route("/", methods=["POST", "GET"])
 def home():
-    #displayScreenValue = None
     if request.method == "POST":
         url = request.form["inp_url"]
         scrapeType = request.form["scrapeType"]
@@ -25,12 +24,7 @@ def home():
         serviceFirstWord = "serviceFirstWord" in request.form
         serviceWordCount = "serviceWordCount" in request.form
         services = [serviceFirstWord,serviceWordCount]
-        print("****************\n\n")
-        print("serviceFirstWord is: ",serviceFirstWord)
-        print("serviceWordCount is: ",serviceWordCount)
-        print("****************\n\n")
         screenValue = scraper(url, scrapeType, outputType,services)
-        #print(screenValue)
         #response
         return render_template("index.html", displayScreenValue=screenValue)
     else:
