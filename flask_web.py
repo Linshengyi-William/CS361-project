@@ -60,7 +60,7 @@ def scraper(input_url,scrapeType,outputType,services):
 
     if scrapeType == "scrape-text": return helper.scrapeText(outputType, text)
     if scrapeType == "scrape-picture": return helper.scrapePics(outputType, pics)
-    if scrapeType == "scrape-both": return helper.scrapeText(outputType, textPics)
+    if scrapeType == "scrape-both": return helper.scrapeBoth(outputType, textPics)
 
         
 def writeToFile(pathname,content):

@@ -5,6 +5,8 @@ import sys
 from bs4 import BeautifulSoup
 import re
 import os
+from pathlib import Path
+from random import randint
 
 # check if the parameter url is a valid wiki url, 
 # then return default url or oreginal url
@@ -87,14 +89,14 @@ def writeToFile(content):
 
 def scrapeText(outputType,text):
     if outputType == "output-on-screen": return text
-    if outputType == "output-save-file": return text
+    if outputType == "output-save-file": return writeToFile(text)
     if outputType == "output-both": 
         writeToFile(text)
         return text
 
 def scrapePics(outputType,pics):
     if outputType == "output-on-screen": return pics
-    if outputType == "output-save-file": return pics
+    if outputType == "output-save-file": return writeToFile(pics)
     if outputType == "output-both": 
         writeToFile(pics)
         return pics
@@ -102,7 +104,7 @@ def scrapePics(outputType,pics):
 def scrapeBoth(outputType,textPics):
 
     if outputType == "output-on-screen": return textPics
-    if outputType == "output-save-file": return textPics
+    if outputType == "output-save-file": return writeToFile(textPics)
     if outputType == "output-both": 
         writeToFile(textPics)
         return textPics
